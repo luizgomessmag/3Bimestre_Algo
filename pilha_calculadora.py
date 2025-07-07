@@ -38,8 +38,10 @@ class Pilha:
     #Pop() = altera o valor do topo   
     def pop(self):
         if(self.size > 0):
+            auxiliar = self.top
             self.top = self.top.next
             self.size -= 1
+            return auxiliar
 
     def topo(self):
         if self.top is not None:
@@ -68,32 +70,68 @@ if __name__ == "__main__":
     # print("Elemento topo: ", pilha.topo())
     # print(pilha)
 
-    sair = ""
+    opcao = ""
     
 
-    while sair != "x":
+    while opcao != "x":
 
-        opcao = input("Deseja adicionar qual tipo de valor? (Operando/Operador)\n").lower()
+        opcao = input("Deseja adicionar qual tipo de valor? (Operando/Operador) ou x para sair\n").lower()
 
         if opcao == "operando":
-
-            pilha.push(No(int(input("Insira o valor\n"))))
-            sair = input("deseja continuar? (s/x)\n")
+            operando = int(input("Insira o operando\n"))
+            pilha.push(No(operando))
 
         elif opcao == "operador":
+            
+            if pilha.tamanho()>=2:
+            
+                operador = input("escolha um dos seguintes: (+, -, *, /, ^, !, %)\n")
 
-            print("escolha um dos seguintes: (+, -, *, /, ^, !, %)")
-            pilha.push(No(str(input("Escolha um dos seguintes valores fornecidos\n"))))
-            sair = input("deseja continuar? (s/x)\n")
-            if len(pilha)>=2: self.top 
+                b = pilha.pop().valor
+                a = pilha.pop().valor
 
-    else: 
-        print("pilha finalizada")
-        print(pilha)
+                # b = pilha.top.valor
+                # a = pilha.top.next.valor
+                resultado = None
+
+                if operador == "+":
+                    resultado = a+b
+
+                elif operador == "-":
+                    resultado = a-b
+
+                elif operador == "*":
+                    resultado = a*b
+
+                elif operador == "/":
+                    if b != 0:
+                        resultado = a/b
+                    else:
+                        pilha.push(No(a))
+                        pilha.push(No(b))
+
+                elif operador == "^":
+                    resultado = a^b
+
+                elif operador == "%":
+                    resultado = a%b
+                
+                else:
+                    print("Erro na sintaxe")
+
+                
+                if resultado is not None:
+                    pilha.push(No(resultado))
+                    print(f"{a} {operador} {b} = {resultado}")
+
+
+        elif opcao == "x": 
+            print("pilha finalizada")
+            print(pilha)
+
+        else:
+            print("Erro")
 
 
 
 #FINALIZAR
-
-
-    
