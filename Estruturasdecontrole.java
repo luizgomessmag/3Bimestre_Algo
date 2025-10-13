@@ -12,7 +12,7 @@ public class Estruturasdecontrole {
         if (numero > 0 && numero <= 7){
             
             if (numero == 1){
-                System.out.println("Segunda");
+                System.out.println("Domingo");
 
             }
             if (numero == 2){
@@ -40,3 +40,4 @@ public class Estruturasdecontrole {
         
     }
 }
+
